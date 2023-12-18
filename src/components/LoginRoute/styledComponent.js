@@ -24,6 +24,19 @@ export const FormContainer = styled.div`
   box-shadow: ${props => (props.lightTheme ? '0px 0px 25px 4px #e2e8f0' : '')};
   border-radius: 5px;
   background-color: ${props => (props.lightTheme ? '#ffffff' : '#0f0f0f')};
+  @media (max-width: 550px) {
+    width: 100%;
+    padding: 50px 25px;
+  }
+
+  @media (min-width: 550px) and (max-width: 768px) {
+    margin: 50px;
+    width: 80%;
+  }
+
+  @media (min-width: 768px) and (max-width: 900px) {
+    width: 50%;
+  }
 `
 
 // App logo image
