@@ -10,38 +10,54 @@ import {
   ImageEl,
   LogoutBtn,
   PopupContainer,
+  PopupMsg,
+  CustomButton,
 } from './styledComponent'
 
-const Header = () => (
-  <HeaderContainer>
-    <HeaderLogo
-      src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-      alt="nxt watch logo"
-    />
-    <IconContainer>
-      <FaMoon fontSize="25px" />
-      <ImageEl
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-        alt="profile"
+import './index.css'
+
+const Header = () => {
+  const fill = true
+  return (
+    <HeaderContainer>
+      <HeaderLogo
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+        alt="nxt watch logo"
       />
-      <Popup modal trigger={<LogoutBtn type="button">Logout</LogoutBtn>}>
-        {close => (
-          <>
-            <PopupContainer>
-              <p>React is a popular and widely used programming language</p>
-            </PopupContainer>
-            <button
-              type="button"
-              className="trigger-button"
-              onClick={() => close()}
-            >
-              Close
-            </button>
-          </>
-        )}
-      </Popup>
-    </IconContainer>
-  </HeaderContainer>
-)
+      <IconContainer>
+        <FaMoon fontSize="25px" />
+        <ImageEl
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+          alt="profile"
+        />
+        <Popup
+          modal
+          trigger={<LogoutBtn type="button">Logout</LogoutBtn>}
+          className="popup-content"
+        >
+          {close => (
+            <>
+              <PopupContainer>
+                <PopupMsg>Are you sure you want to logout?</PopupMsg>
+                <center>
+                  <CustomButton type="button" onClick={() => close()}>
+                    Cancel
+                  </CustomButton>
+                  <CustomButton
+                    fill="true"
+                    type="button"
+                    onClick={() => close()}
+                  >
+                    Cancel
+                  </CustomButton>
+                </center>
+              </PopupContainer>
+            </>
+          )}
+        </Popup>
+      </IconContainer>
+    </HeaderContainer>
+  )
+}
 
 export default Header
