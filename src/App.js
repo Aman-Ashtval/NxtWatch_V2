@@ -12,7 +12,9 @@ class App extends Component {
   state = {lightTheme: true}
 
   changeAppTheme = () => {
-    this.state(prevState => ({lightTheme: !prevState.lightTheme}))
+    this.setState(prevState => ({lightTheme: !prevState.lightTheme}))
+    const {match} = this.props
+    console.log(match)
   }
 
   render() {
