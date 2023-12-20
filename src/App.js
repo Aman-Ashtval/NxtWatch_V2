@@ -4,6 +4,7 @@ import {Component} from 'react'
 import LoginRoute from './components/LoginRoute'
 import HomeRoute from './components/HomeRoute'
 import AppContext from './context/AppContext'
+import VideoItemDetails from './components/VideoItemDetails'
 
 import './App.css'
 
@@ -26,6 +27,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/login" component={LoginRoute} />
           <Route exact path="/" component={HomeRoute} />
+          <Route exact path="/videos/:id" component={VideoItemDetails} />
         </Switch>
       </AppContext.Provider>
     )

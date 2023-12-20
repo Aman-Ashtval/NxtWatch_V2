@@ -1,4 +1,6 @@
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
+
 import Cookies from 'js-cookie'
 import {BiSearch} from 'react-icons/bi'
 
@@ -13,11 +15,18 @@ import {
   InputContainer,
   InputEl,
   SearchButton,
+  LoaderContainer,
+  ListContainer,
+  ImageEl,
+  Heading,
+  ParagraphEl,
+  RetryButton,
 } from './styledComponent'
 
 import AppContext from '../../context/AppContext'
 import Header from '../Header'
 import LeftBar from '../LeftBar'
+import VideoItem from '../VideoItem'
 
 // state object
 const statusConstant = {
@@ -56,7 +65,8 @@ class HomeRoute extends Component {
 
   getVideoData = async () => {
     this.setState({responseStatus: statusConstant.inProgress})
-    const api = 'https://apis.ccbp.in/videos/all?search='
+    const {searchInput} = this.state
+    const api = `https://apis.ccbp.in/videos/all?search=${searchInput}`
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       method: 'GET',
@@ -68,9 +78,10 @@ class HomeRoute extends Component {
 
     if (response.ok) {
       const data = await response.json()
-      console.log(data)
       const videosList = await this.getFilterObject(data.videos)
       this.setState({videosList, responseStatus: statusConstant.success})
+    } else {
+      this.setState({responseStatus: statusConstant.failure})
     }
   }
 
@@ -82,14 +93,79 @@ class HomeRoute extends Component {
     this.setState({showBanner: false})
   }
 
-  // Render Loading View method
-  getLoadingView = () => {}
+  retrySearchItem = () => {
+    this.setState({searchInput: ''}, this.getVideoData)
+  }
 
-  renderResponseView = () => {
+  // empty List view
+  getNoSearchView = lightTheme => (
+    <LoaderContainer>
+      <ImageEl
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+        alt="no videos"
+      />
+      <Heading lightTheme={lightTheme}>No Search results found</Heading>
+      <ParagraphEl>Try different key words or remove search filter</ParagraphEl>
+      <RetryButton type="button" onClick={this.retrySearchItem}>
+        Retry
+      </RetryButton>
+    </LoaderContainer>
+  )
+
+  // get videos list view
+  getVideosListView = lightTheme => {
+    const {videosList} = this.state
+
+    if (videosList.length === 0) {
+      return this.getNoSearchView(lightTheme)
+    }
+    return (
+      <ListContainer>
+        {videosList.map(each => (
+          <VideoItem key={each.id} videoDetails={each} />
+        ))}
+      </ListContainer>
+    )
+  }
+
+  // render failure view
+  getFailureView = lightTheme => (
+    <LoaderContainer>
+      {lightTheme ? (
+        <ImageEl
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+          alt="no videos"
+        />
+      ) : (
+        <ImageEl
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
+          alt="no videos"
+        />
+      )}
+      <Heading lightTheme={lightTheme}>No Search results found</Heading>
+      <ParagraphEl>Try different key words or remove search filter</ParagraphEl>
+      <RetryButton type="button" onClick={this.retrySearchItem}>
+        Retry
+      </RetryButton>
+    </LoaderContainer>
+  )
+
+  // Render Loading View method
+  getLoadingView = () => (
+    <LoaderContainer data-testid="loader">
+      <Loader type="ThreeDots" color=" #4f46e5" height="50" width="50" />
+    </LoaderContainer>
+  )
+
+  renderResponseView = lightTheme => {
     const {responseStatus} = this.state
     switch (responseStatus) {
       case statusConstant.inProgress:
         return this.getLoadingView()
+      case statusConstant.success:
+        return this.getVideosListView(lightTheme)
+      case statusConstant.failure:
+        return this.getFailureView(lightTheme)
 
       default:
         return null
@@ -140,13 +216,13 @@ class HomeRoute extends Component {
                       placeholder="Search"
                       lightTheme={lightTheme}
                     />
-                    <SearchButton>
+                    <SearchButton type="search" onClick={this.getVideoData}>
                       <BiSearch />
                     </SearchButton>
                   </InputContainer>
 
                   {/* render the response View by method calling-------------------------------------------------> */}
-                  {this.renderResponseView()}
+                  {this.renderResponseView(lightTheme)}
                 </RightContainer>
               </HomeContainer>
             </>

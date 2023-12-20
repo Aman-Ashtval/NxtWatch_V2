@@ -9,6 +9,7 @@ import {RiPlayListAddLine} from 'react-icons/ri'
 export const LeftContainer = styled.div`
   height: 100vh;
   width: 20%;
+  flex-shrink: 0;
   background-color: ${props => (props.lightTheme ? '#ffffff' : '#212121')};
   display: flex;
   flex-direction: column;
