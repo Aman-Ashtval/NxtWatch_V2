@@ -68,56 +68,62 @@ class LoginRoute extends Component {
   }
 
   // render form element here
-  getFormView = lightTheme => {
-    const {
-      username,
-      password,
-      showPassword,
-      showErrorMsg,
-      errorMsg,
-    } = this.state
-    const passwordType = showPassword ? 'text' : 'password'
-    return (
-      <FormElement onSubmit={this.submitFormDetails}>
-        <LabelEl htmlFor="name" lightTheme={lightTheme}>
-          USERNAME
-        </LabelEl>
-        <InputEl
-          type="text"
-          id="name"
-          placeholder="Username"
-          value={username}
-          onChange={this.onChangeUsername}
-        />
-        <LabelEl htmlFor="password" lightTheme={lightTheme}>
-          USERNAME
-        </LabelEl>
-        <InputEl
-          type={passwordType}
-          id="password"
-          placeholder="Password"
-          value={password}
-          show
-          onChange={this.onChangePassword}
-        />
-        <Container>
-          <CheckBoxInput
-            type="checkbox"
-            id="togglePassword"
-            onChange={this.toggleCheckbox}
-          />
-          <LabelEl htmlFor="togglePassword" lightTheme={lightTheme}>
-            Show Password
-          </LabelEl>
-        </Container>
+  getFormView = () => (
+    <AppContext.Consumer>
+      {value => {
+        const {lightTheme} = value
 
-        <LoginButton type="submit">Login</LoginButton>
-        {showErrorMsg && (
-          <ErrorMsg lightTheme={lightTheme}>*{errorMsg}</ErrorMsg>
-        )}
-      </FormElement>
-    )
-  }
+        const {
+          username,
+          password,
+          showPassword,
+          showErrorMsg,
+          errorMsg,
+        } = this.state
+        const passwordType = showPassword ? 'text' : 'password'
+        return (
+          <FormElement onSubmit={this.submitFormDetails}>
+            <LabelEl htmlFor="name" lightTheme={lightTheme}>
+              USERNAME
+            </LabelEl>
+            <InputEl
+              type="text"
+              id="name"
+              placeholder="Username"
+              value={username}
+              onChange={this.onChangeUsername}
+            />
+            <LabelEl htmlFor="password" lightTheme={lightTheme}>
+              USERNAME
+            </LabelEl>
+            <InputEl
+              type={passwordType}
+              id="password"
+              placeholder="Password"
+              value={password}
+              show
+              onChange={this.onChangePassword}
+            />
+            <Container>
+              <CheckBoxInput
+                type="checkbox"
+                id="togglePassword"
+                onChange={this.toggleCheckbox}
+              />
+              <LabelEl htmlFor="togglePassword" lightTheme={lightTheme}>
+                Show Password
+              </LabelEl>
+            </Container>
+
+            <LoginButton type="submit">Login</LoginButton>
+            {showErrorMsg && (
+              <ErrorMsg lightTheme={lightTheme}>*{errorMsg}</ErrorMsg>
+            )}
+          </FormElement>
+        )
+      }}
+    </AppContext.Consumer>
+  )
 
   render() {
     // define redirect login page logic if the user is authenticated
@@ -139,7 +145,7 @@ class LoginRoute extends Component {
               <LoginContainer lightTheme={lightTheme}>
                 <FormContainer lightTheme={lightTheme}>
                   <LogoImage src={appLogoUrl} alt="website logo" />
-                  {this.getFormView(lightTheme)}
+                  {this.getFormView()}
                 </FormContainer>
               </LoginContainer>
             </>

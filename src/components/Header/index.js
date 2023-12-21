@@ -1,4 +1,4 @@
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import {FaMoon, FaArrowAltCircleRight} from 'react-icons/fa'
@@ -44,9 +44,13 @@ const Header = props => {
         ) : (
           <IoSunnyOutline color="#ffffff" fontSize="28px" />
         )
+
         return (
           <HeaderContainer lightTheme={lightTheme}>
-            <HeaderLogo src={headerLogoImageUrl} alt="nxt watch logo" />
+            <Link to="/">
+              <HeaderLogo src={headerLogoImageUrl} alt="nxt watch logo" />
+            </Link>
+
             <IconContainer>
               <ThemeChangeButton type="button" onClick={changeAppTheme}>
                 {themeIcon}

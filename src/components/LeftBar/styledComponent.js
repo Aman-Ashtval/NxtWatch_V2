@@ -14,7 +14,7 @@ export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0px 0px 25px 0px;
+  padding: 0px 0px 20px 0px;
   @media (max-width: 768px) {
     display: none;
   }
@@ -37,43 +37,43 @@ export const NavLink = styled(Link)`
 export const ListItem = styled.li`
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px 16px;
   color: inherit;
   background-color: ${props => {
-    const {active, lightTheme} = props
-    if (active && lightTheme) {
+    const {isActive, lightTheme} = props
+    if (isActive && lightTheme) {
       return '#f1f1f1'
     }
-    if (active && lightTheme === false) {
+    if (isActive && lightTheme === false) {
       return '#383838'
     }
     return 'transparent'
   }};
-  font-weight: ${props => (props.active ? 'bold' : '400px')};
+  font-weight: ${props => (props.isActive ? 'bold' : '400px')};
 `
 
 // Home icon
 export const HomeIcon = styled(AiFillHome)`
   font-size: 20px;
-  color: ${props => (props.active ? ' #ff0b37' : 'inherit')};
+  color: ${props => (props.active === 'true' ? ' #ff0b37' : 'inherit')};
 `
 
 // Fire Icon
 export const FireIcon = styled(FaFire)`
   font-size: 20px;
-  color: inherit;
+  color: ${props => (props.active === 'true' ? ' #ff0b37' : 'inherit')};
 `
 
 // Game Icon
 export const GameIcon = styled(FaGamepad)`
   font-size: 20px;
-  color: inherit;
+  color: ${props => (props.active === 'true' ? ' #ff0b37' : 'inherit')};
 `
 
 // Play List Icon
 export const SaveListIcon = styled(RiPlayListAddLine)`
   font-size: 20px;
-  color: inherit;
+  color: ${props => (props.active === 'true' ? ' #ff0b37' : 'inherit')};
 `
 
 // icon name paragraph
@@ -87,7 +87,7 @@ export const NameParagraph = styled.p`
 
 // left NavBar Bottom container div
 export const BottomContainer = styled.div`
-  padding: 10px;
+  padding: 10px 16px;
 `
 
 // Bottom Container Heading Container

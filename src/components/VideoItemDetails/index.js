@@ -1,5 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
+
 import {formatDistanceToNow} from 'date-fns'
 import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
 import {RiPlayListAddLine} from 'react-icons/ri'
@@ -24,6 +26,11 @@ import {
   Name,
   Title,
   Description,
+  LoaderContainer,
+  ImageEl,
+  FailureHeading,
+  FailureDescription,
+  RetryButton,
 } from './styledComponent'
 
 // api constant values
@@ -83,6 +90,8 @@ class VideoItemDetails extends Component {
       const data = await response.json()
       const videoDetails = this.getFilterObject(data.video_details)
       this.setState({videoDetails, responseStatus: responseConstants.success})
+    } else {
+      this.setState({responseStatus: responseConstants.success})
     }
   }
 
@@ -95,72 +104,134 @@ class VideoItemDetails extends Component {
     this.setState(prevState => ({isDislike: !prevState.isDislike}))
   }
 
-  toggleSave = () => {
-    this.setState(prevState => ({isSaved: !prevState.isSaved}))
-  }
-
   // get the successView of video
-  getSuccessView = lightTheme => {
-    const {videoDetails, isLike, isDislike, isSaved} = this.state
-    const {
-      videoUrl,
-      title,
-      viewCount,
-      publishedAt,
-      channel,
-      description,
-    } = videoDetails
-    const {name, profileImageUrl, subscriberCount} = channel
+  getSuccessView = () => (
+    <AppContext.Consumer>
+      {value => {
+        const {lightTheme, saveVideo} = value
 
-    return (
-      <>
-        <Player url={videoUrl} controls width="100%" />
-        <Heading lightTheme={lightTheme}>{title}</Heading>
-        <FlexContainer>
-          <Container>
-            <ParagraphEl>{viewCount} views</ParagraphEl>
-            <DotIcon />
-            <ParagraphEl>
-              {formatDistanceToNow(new Date(publishedAt))}
-            </ParagraphEl>
-          </Container>
-          <Container>
-            <ResponseButton isFill={isLike} onClick={this.toggleLike}>
-              <AiOutlineLike
-                fontSize="18px"
-                style={{margin: '0px 3px 0px 0px'}}
+        const {videoDetails, isLike, isDislike, isSaved} = this.state
+        const {
+          videoUrl,
+          title,
+          viewCount,
+          publishedAt,
+          channel,
+          description,
+        } = videoDetails
+        const {name, profileImageUrl, subscriberCount} = channel
+
+        // save video method calling
+        const toggleSave = () => {
+          this.setState(prevState => ({isSaved: !prevState.isSaved}))
+          saveVideo({...videoDetails})
+        }
+
+        return (
+          <>
+            <Player url={videoUrl} controls width="100%" />
+            <Heading lightTheme={lightTheme}>{title}</Heading>
+            <FlexContainer>
+              <Container>
+                <ParagraphEl>{viewCount} views</ParagraphEl>
+                <DotIcon />
+                <ParagraphEl>
+                  {formatDistanceToNow(new Date(publishedAt))}
+                </ParagraphEl>
+              </Container>
+              <Container>
+                <ResponseButton isFill={isLike} onClick={this.toggleLike}>
+                  <AiOutlineLike
+                    fontSize="18px"
+                    style={{margin: '0px 3px 0px 0px'}}
+                  />
+                  Like
+                </ResponseButton>
+                <ResponseButton isFill={isDislike} onClick={this.toggleDisLike}>
+                  <AiOutlineDislike
+                    fontSize="18px"
+                    style={{margin: '0px 3px'}}
+                  />
+                  DisLike
+                </ResponseButton>
+                <ResponseButton isFill={isSaved} onClick={toggleSave}>
+                  <RiPlayListAddLine
+                    fontSize="18px"
+                    style={{margin: '0px 5px'}}
+                  />
+                  Save
+                </ResponseButton>
+              </Container>
+            </FlexContainer>
+            {/* channel details render here-------------------------------------> */}
+            <ChannelContainer>
+              <ProfileImage src={profileImageUrl} alt={name} />
+              <TextContainer>
+                <Name lightTheme={lightTheme}>{name}</Name>
+                <Title lightTheme={lightTheme}>
+                  {subscriberCount} Subscribers
+                </Title>
+                <Description lightTheme={lightTheme}>{description}</Description>
+              </TextContainer>
+            </ChannelContainer>
+          </>
+        )
+      }}
+    </AppContext.Consumer>
+  )
+
+  // render failure view
+  getFailureView = () => (
+    <AppContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+
+        return (
+          <LoaderContainer>
+            {lightTheme ? (
+              <ImageEl
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+                alt="no videos"
               />
-              Like
-            </ResponseButton>
-            <ResponseButton isFill={isDislike} onClick={this.toggleDisLike}>
-              <AiOutlineDislike fontSize="18px" style={{margin: '0px 3px'}} />
-              DisLike
-            </ResponseButton>
-            <ResponseButton isFill={isSaved} onClick={this.toggleSave}>
-              <RiPlayListAddLine fontSize="18px" style={{margin: '0px 5px'}} />
-              Save
-            </ResponseButton>
-          </Container>
-        </FlexContainer>
-        {/* channel details render here-------------------------------------> */}
-        <ChannelContainer>
-          <ProfileImage src={profileImageUrl} alt={name} />
-          <TextContainer>
-            <Name lightTheme={lightTheme}>{name}</Name>
-            <Title lightTheme={lightTheme}>{subscriberCount} Subscribers</Title>
-            <Description lightTheme={lightTheme}>{description}</Description>
-          </TextContainer>
-        </ChannelContainer>
-      </>
-    )
-  }
+            ) : (
+              <ImageEl
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
+                alt="no videos"
+              />
+            )}
+            <FailureHeading lightTheme={lightTheme}>
+              Oops! Something Went Wrong
+            </FailureHeading>
+            <FailureDescription>
+              We are having some trouble to complete your request. Please try
+              again.
+            </FailureDescription>
+            <RetryButton type="button" onClick={this.getVideoDetails}>
+              Retry
+            </RetryButton>
+          </LoaderContainer>
+        )
+      }}
+    </AppContext.Consumer>
+  )
 
-  getVideoDetailsView = lightTheme => {
+  // render Loader view
+  getLoadingView = () => (
+    <LoaderContainer data-testid="loader">
+      <Loader type="ThreeDots" color=" #4f46e5" height="50" width="50" />
+    </LoaderContainer>
+  )
+
+  getVideoDetailsView = () => {
     const {responseStatus} = this.state
 
     switch (responseStatus) {
       case responseConstants.success:
-        return this.getSuccessView(lightTheme)
+        return this.getSuccessView()
+      case responseConstants.inProgress:
+        return this.getLoadingView()
+      case responseConstants.failure:
+        return this.getFailureView()
 
       default:
         return null
@@ -179,7 +250,7 @@ class VideoItemDetails extends Component {
               <BgContainer>
                 <LeftBar />
                 <RightContainer lightTheme={lightTheme}>
-                  {this.getVideoDetailsView(lightTheme)}
+                  {this.getVideoDetailsView()}
                 </RightContainer>
               </BgContainer>
             </>

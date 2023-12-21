@@ -28,7 +28,7 @@ import Header from '../Header'
 import LeftBar from '../LeftBar'
 import VideoItem from '../VideoItem'
 
-// state object
+// status object
 const statusConstant = {
   success: 'SUCCESS',
   failure: 'FAILURE',
@@ -98,56 +98,82 @@ class HomeRoute extends Component {
   }
 
   // empty List view
-  getNoSearchView = lightTheme => (
-    <LoaderContainer>
-      <ImageEl
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
-        alt="no videos"
-      />
-      <Heading lightTheme={lightTheme}>No Search results found</Heading>
-      <ParagraphEl>Try different key words or remove search filter</ParagraphEl>
-      <RetryButton type="button" onClick={this.retrySearchItem}>
-        Retry
-      </RetryButton>
-    </LoaderContainer>
+  getNoSearchView = () => (
+    <AppContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+
+        return (
+          <LoaderContainer>
+            <ImageEl
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+              alt="no videos"
+            />
+            <Heading lightTheme={lightTheme}>No Search results found</Heading>
+            <ParagraphEl>
+              Try different key words or remove search filter
+            </ParagraphEl>
+            <RetryButton type="button" onClick={this.retrySearchItem}>
+              Retry
+            </RetryButton>
+          </LoaderContainer>
+        )
+      }}
+    </AppContext.Consumer>
   )
 
   // get videos list view
-  getVideosListView = lightTheme => {
-    const {videosList} = this.state
+  getVideosListView = () => (
+    <AppContext.Consumer>
+      {value => {
+        const {lightTheme} = value
 
-    if (videosList.length === 0) {
-      return this.getNoSearchView(lightTheme)
-    }
-    return (
-      <ListContainer>
-        {videosList.map(each => (
-          <VideoItem key={each.id} videoDetails={each} />
-        ))}
-      </ListContainer>
-    )
-  }
+        const {videosList} = this.state
+
+        if (videosList.length === 0) {
+          return this.getNoSearchView(lightTheme)
+        }
+        return (
+          <ListContainer>
+            {videosList.map(each => (
+              <VideoItem key={each.id} videoDetails={each} />
+            ))}
+          </ListContainer>
+        )
+      }}
+    </AppContext.Consumer>
+  )
 
   // render failure view
-  getFailureView = lightTheme => (
-    <LoaderContainer>
-      {lightTheme ? (
-        <ImageEl
-          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-          alt="no videos"
-        />
-      ) : (
-        <ImageEl
-          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-          alt="no videos"
-        />
-      )}
-      <Heading lightTheme={lightTheme}>No Search results found</Heading>
-      <ParagraphEl>Try different key words or remove search filter</ParagraphEl>
-      <RetryButton type="button" onClick={this.retrySearchItem}>
-        Retry
-      </RetryButton>
-    </LoaderContainer>
+  getFailureView = () => (
+    <AppContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+
+        return (
+          <LoaderContainer>
+            {lightTheme ? (
+              <ImageEl
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+                alt="no videos"
+              />
+            ) : (
+              <ImageEl
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
+                alt="no videos"
+              />
+            )}
+            <Heading lightTheme={lightTheme}>No Search results found</Heading>
+            <ParagraphEl>
+              Try different key words or remove search filter
+            </ParagraphEl>
+            <RetryButton type="button" onClick={this.retrySearchItem}>
+              Retry
+            </RetryButton>
+          </LoaderContainer>
+        )
+      }}
+    </AppContext.Consumer>
   )
 
   // Render Loading View method
@@ -157,15 +183,15 @@ class HomeRoute extends Component {
     </LoaderContainer>
   )
 
-  renderResponseView = lightTheme => {
+  renderResponseView = () => {
     const {responseStatus} = this.state
     switch (responseStatus) {
       case statusConstant.inProgress:
         return this.getLoadingView()
       case statusConstant.success:
-        return this.getVideosListView(lightTheme)
+        return this.getVideosListView()
       case statusConstant.failure:
-        return this.getFailureView(lightTheme)
+        return this.getFailureView()
 
       default:
         return null
@@ -222,7 +248,7 @@ class HomeRoute extends Component {
                   </InputContainer>
 
                   {/* render the response View by method calling-------------------------------------------------> */}
-                  {this.renderResponseView(lightTheme)}
+                  {this.renderResponseView()}
                 </RightContainer>
               </HomeContainer>
             </>

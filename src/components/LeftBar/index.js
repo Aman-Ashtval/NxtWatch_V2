@@ -60,11 +60,11 @@ const LeftBar = props => {
                 const {id, url, displayText, iconClass} = each
                 const Icon = iconClass
                 const itemProp = {
-                  active: activePath === url,
+                  isActive: activePath === url,
                   lightTheme,
                 }
                 return (
-                  <NavLink to="/" key={id}>
+                  <NavLink to={url} key={id}>
                     <ListItem {...itemProp}>
                       <Icon active={activePath === url ? 'true' : 'false'} />
                       <NameParagraph {...itemProp}>{displayText}</NameParagraph>
