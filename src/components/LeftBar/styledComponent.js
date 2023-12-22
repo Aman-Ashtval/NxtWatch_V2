@@ -25,12 +25,21 @@ export const MenuItemList = styled.ul`
   list-style-type: none;
   padding: 0px;
   color: ${props => (props.lightTheme ? '#475569' : ' #f8fafc')};
+  @media (max-width: 768px) {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 // menu Link
 export const NavLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 // menu list item
@@ -50,6 +59,9 @@ export const ListItem = styled.li`
     return 'transparent'
   }};
   font-weight: ${props => (props.isActive ? 'bold' : '400px')};
+  @media (max-width: 768px) {
+    padding-left: 40%;
+  }
 `
 
 // Home icon

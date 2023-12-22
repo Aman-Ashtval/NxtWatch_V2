@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import Popup from 'reactjs-popup'
+import {BsX} from 'react-icons/bs'
 
 export const HeaderContainer = styled.div`
   padding: 16px 50px;
@@ -108,4 +110,39 @@ export const MenuButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+// Popup for menu item in small devices ----------------------------->
+export const PopupEl = styled(Popup)`
+  &-content {
+    width: 100%;
+  }
+`
+
+// Popup container
+export const MenuContainer = styled.div`
+  align-self: stretch;
+  width: 100%;
+  height: 100vh;
+  margin: 0px;
+  padding: 16px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  background: ${props => (props.lightTheme ? '#ffffff' : ' #212121')};
+`
+
+// cancel button
+export const CancelButton = styled.button`
+  background-color: transparent;
+  align-self: flex-end;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+`
+
+// cancel icon
+export const CancelIcon = styled(BsX)`
+  font-size: 28px;
+  color: ${props => (props.lightTheme ? ' #212121' : '#ffffff')};
 `

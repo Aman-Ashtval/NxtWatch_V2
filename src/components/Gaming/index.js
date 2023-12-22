@@ -5,15 +5,19 @@ import Loader from 'react-loader-spinner'
 import AppContext from '../../context/AppContext'
 import Header from '../Header'
 import LeftBar from '../LeftBar'
-import TrendingItem from '../TrendingItem'
 
 import {
-  TrendingContainer,
+  GamingContainer,
   RightContainer,
-  TrendingBg,
-  FireIcon,
-  Heading,
+  GamingBg,
+  GameIcon,
+  GameHeading,
   ListEl,
+  LinkItem,
+  ListItem,
+  GameBanner,
+  Title,
+  Description,
 } from './styledComponent'
 
 import {
@@ -32,32 +36,26 @@ const statusConstant = {
   initial: 'INITIAL',
 }
 
-class Trending extends Component {
-  state = {trendingList: [], responseStatus: statusConstant.initial}
+class Gaming extends Component {
+  state = {gamesList: [], responseStatus: statusConstant.initial}
 
   componentDidMount() {
-    this.getTrendingData()
+    this.getGamingData()
   }
 
   getFilterObject = fetchedData => {
     const filterData = fetchedData.map(each => ({
       id: each.id,
-      publishedAt: each.published_at,
       thumbnailUrl: each.thumbnail_url,
       title: each.title,
       totalView: each.view_count,
-      channel: {
-        name: each.channel.name,
-        profileImageUrl: each.channel.profile_image_url,
-      },
     }))
     return filterData
   }
 
-  // get trending list data
-  getTrendingData = async () => {
+  getGamingData = async () => {
     this.setState({responseStatus: statusConstant.inProgress})
-    const api = 'https://apis.ccbp.in/videos/trending'
+    const gamingApi = 'https://apis.ccbp.in/videos/gaming'
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       method: 'GET',
@@ -65,11 +63,13 @@ class Trending extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const response = await fetch(api, options)
+    const response = await fetch(gamingApi, options)
     if (response.ok) {
       const data = await response.json()
-      const trendingList = await this.getFilterObject(data.videos)
-      this.setState({trendingList, responseStatus: statusConstant.success})
+      const gamesList = await this.getFilterObject(data.videos)
+      this.setState({gamesList, responseStatus: statusConstant.success})
+    } else {
+      this.setState({responseStatus: statusConstant.failure})
     }
   }
 
@@ -79,17 +79,26 @@ class Trending extends Component {
       {value => {
         const {lightTheme} = value
 
-        const {trendingList} = this.state
+        const {gamesList} = this.state
         return (
           <>
-            <TrendingBg lightTheme={lightTheme}>
-              <FireIcon theme={lightTheme ? 'true' : 'false'} />
-              <Heading lightTheme={lightTheme}>Trending</Heading>
-            </TrendingBg>
+            <GamingBg lightTheme={lightTheme}>
+              <GameIcon theme={lightTheme ? 'true' : 'false'} />
+              <GameHeading lightTheme={lightTheme}>Gaming</GameHeading>
+            </GamingBg>
             <ListEl>
-              {trendingList.map(each => (
-                <TrendingItem key={each.id} itemDetails={each} />
-              ))}
+              {gamesList.map(each => {
+                const {id, title, thumbnailUrl, totalView} = each
+                return (
+                  <LinkItem to={`/videos/${id}`} key={id}>
+                    <ListItem>
+                      <GameBanner src={thumbnailUrl} alt={title} />
+                      <Title lightTheme={lightTheme}>{title}</Title>
+                      <Description>{totalView} Watching Worldwide</Description>
+                    </ListItem>
+                  </LinkItem>
+                )
+              })}
             </ListEl>
           </>
         )
@@ -123,7 +132,7 @@ class Trending extends Component {
               We are having some trouble to complete your request. Please try
               again.
             </FailureDescription>
-            <RetryButton type="button" onClick={this.getTrendingData}>
+            <RetryButton type="button" onClick={this.getGamingData}>
               Retry
             </RetryButton>
           </LoaderContainer>
@@ -139,7 +148,8 @@ class Trending extends Component {
     </LoaderContainer>
   )
 
-  renderTrendingView = () => {
+  // render view logic
+  renderGamingView = () => {
     const {responseStatus} = this.state
     switch (responseStatus) {
       case statusConstant.success:
@@ -165,10 +175,10 @@ class Trending extends Component {
           return (
             <>
               <Header activePath={path} />
-              <TrendingContainer lightTheme={lightTheme}>
+              <GamingContainer lightTheme={lightTheme}>
                 <LeftBar activePath={path} />
-                <RightContainer>{this.renderTrendingView()}</RightContainer>
-              </TrendingContainer>
+                <RightContainer>{this.renderGamingView()}</RightContainer>
+              </GamingContainer>
             </>
           )
         }}
@@ -177,4 +187,4 @@ class Trending extends Component {
   }
 }
 
-export default Trending
+export default Gaming

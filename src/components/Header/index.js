@@ -20,13 +20,56 @@ import {
   MenuButton,
   ThemeChangeButton,
   SpanText,
+  PopupEl,
+  MenuContainer,
+  CancelButton,
+  CancelIcon,
 } from './styledComponent'
+
+import {
+  MenuItemList,
+  NavLink,
+  ListItem,
+  HomeIcon,
+  NameParagraph,
+  FireIcon,
+  GameIcon,
+  SaveListIcon,
+} from '../LeftBar/styledComponent'
 import AppContext from '../../context/AppContext'
 
 import './index.css'
 
+// Menu Item List
+const menuItemList = [
+  {
+    id: 'home',
+    url: '/',
+    displayText: 'Home',
+    iconClass: HomeIcon,
+  },
+  {
+    id: 'trending',
+    url: '/trending',
+    displayText: 'Trending',
+    iconClass: FireIcon,
+  },
+  {
+    id: 'gaming',
+    url: '/gaming',
+    displayText: 'Gaming',
+    iconClass: GameIcon,
+  },
+  {
+    id: 'saveVideo',
+    url: '/saved-videos',
+    displayText: 'saved videos',
+    iconClass: SaveListIcon,
+  },
+]
+
 const Header = props => {
-  const {history} = props
+  const {history, activePath} = props
   const logoutUser = () => {
     Cookies.remove('jwt_token')
     history.replace('/login')
@@ -57,7 +100,7 @@ const Header = props => {
               </ThemeChangeButton>
 
               {/* menu popup --------------------------------------------------------------------------------------------------------------- */}
-              <Popup
+              <PopupEl
                 modal
                 trigger={
                   <MenuButton type="button" lightTheme={lightTheme}>
@@ -72,23 +115,40 @@ const Header = props => {
                     />
                   </MenuButton>
                 }
-                className="popup-content"
               >
                 {close => (
-                  <>
-                    <PopupContainer lightTheme={lightTheme}>
-                      <PopupMsg lightTheme={lightTheme}>
-                        Are you sure you want to logout?
-                      </PopupMsg>
-                      <center>
-                        <CustomButton type="button" onClick={() => close()}>
-                          Cancel
-                        </CustomButton>
-                      </center>
-                    </PopupContainer>
-                  </>
+                  <MenuContainer lightTheme={lightTheme}>
+                    <CancelButton type="button" onClick={() => close()}>
+                      <CancelIcon lightTheme={lightTheme} />
+                    </CancelButton>
+
+                    {/* menu list in small devices--------------------------------------> */}
+
+                    <MenuItemList lightTheme={lightTheme}>
+                      {menuItemList.map(each => {
+                        const {id, url, displayText, iconClass} = each
+                        const Icon = iconClass
+                        const itemProp = {
+                          isActive: activePath === url,
+                          lightTheme,
+                        }
+                        return (
+                          <NavLink to={url} key={id}>
+                            <ListItem {...itemProp}>
+                              <Icon
+                                active={activePath === url ? 'true' : 'false'}
+                              />
+                              <NameParagraph {...itemProp}>
+                                {displayText}
+                              </NameParagraph>
+                            </ListItem>
+                          </NavLink>
+                        )
+                      })}
+                    </MenuItemList>
+                  </MenuContainer>
                 )}
-              </Popup>
+              </PopupEl>
 
               {/* logout Popup container----------------------------------------------------------------------------------------------------- */}
               <Popup
@@ -97,7 +157,7 @@ const Header = props => {
                   <LogoutBtn type="button" lightTheme={lightTheme}>
                     <SpanText>Logout</SpanText>
                     <FaArrowAltCircleRight
-                      fontSize="30px"
+                      fontSize="28px"
                       color="inherit"
                       className="small-device-icons"
                     />

@@ -12,3 +12,8 @@
     display: none;
   }
 }
+
+.popup-content-menu {
+  width: 100%;
+  border: 1px solid red;
+}

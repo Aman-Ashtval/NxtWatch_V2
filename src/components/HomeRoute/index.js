@@ -226,7 +226,7 @@ class HomeRoute extends Component {
 
           return (
             <>
-              <Header />
+              <Header activePath={path} />
               <HomeContainer data-testid="home" lightTheme={lightTheme}>
                 <LeftBar activePath={path} />
                 <RightContainer>
