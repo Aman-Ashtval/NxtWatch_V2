@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Popup from 'reactjs-popup'
 import {BsX} from 'react-icons/bs'
+import {FaArrowAltCircleRight} from 'react-icons/fa'
+import {GiHamburgerMenu} from 'react-icons/gi'
 
 export const HeaderContainer = styled.div`
   padding: 16px 50px;
@@ -119,6 +121,18 @@ export const PopupEl = styled(Popup)`
   }
 `
 
+// logout popup
+export const LogoutPopup = styled(Popup)`
+  &-content {
+    width: 400px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+  }
+`
+
 // Popup container
 export const MenuContainer = styled.div`
   align-self: stretch;
@@ -145,4 +159,22 @@ export const CancelButton = styled.button`
 export const CancelIcon = styled(BsX)`
   font-size: 28px;
   color: ${props => (props.lightTheme ? ' #212121' : '#ffffff')};
+`
+
+// small device icons ------------------------------------->
+export const LogoutArrow = styled(FaArrowAltCircleRight)`
+  font-size: 30px;
+  color: inherit;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
+export const MenuIcon = styled(GiHamburgerMenu)`
+  font-size: 30px;
+  color: inherit;
+  cursor: pointer;
+  @media (min-width: 768px) {
+    display: none;
+  }
 `

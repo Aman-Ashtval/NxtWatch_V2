@@ -1,10 +1,8 @@
 import {withRouter, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import {FaMoon, FaArrowAltCircleRight} from 'react-icons/fa'
+import {FaMoon} from 'react-icons/fa'
 import {IoSunnyOutline} from 'react-icons/io5'
-import {GiHamburgerMenu} from 'react-icons/gi'
-import Popup from 'reactjs-popup'
 
 import 'reactjs-popup/dist/index.css'
 
@@ -24,6 +22,9 @@ import {
   MenuContainer,
   CancelButton,
   CancelIcon,
+  LogoutArrow,
+  MenuIcon,
+  LogoutPopup,
 } from './styledComponent'
 
 import {
@@ -36,8 +37,6 @@ import {
   SaveListIcon,
 } from '../LeftBar/styledComponent'
 import AppContext from '../../context/AppContext'
-
-import './index.css'
 
 // Menu Item List
 const menuItemList = [
@@ -107,11 +106,7 @@ const Header = props => {
                       src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
                       alt="profile"
                     />
-                    <GiHamburgerMenu
-                      fontSize="30px"
-                      color="inherit"
-                      className="small-device-icons"
-                    />
+                    <MenuIcon />
                   </MenuButton>
                 }
               >
@@ -146,16 +141,12 @@ const Header = props => {
               </PopupEl>
 
               {/* logout Popup container----------------------------------------------------------------------------------------------------- */}
-              <Popup
+              <LogoutPopup
                 modal
                 trigger={
                   <LogoutBtn lightTheme={lightTheme}>
                     <SpanText>Logout</SpanText>
-                    <FaArrowAltCircleRight
-                      fontSize="28px"
-                      color="inherit"
-                      className="small-device-icons"
-                    />
+                    <LogoutArrow />
                   </LogoutBtn>
                 }
                 className="popup-content"
@@ -177,7 +168,7 @@ const Header = props => {
                     </PopupContainer>
                   </>
                 )}
-              </Popup>
+              </LogoutPopup>
             </IconContainer>
           </HeaderContainer>
         )

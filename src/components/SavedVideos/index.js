@@ -12,13 +12,10 @@ import {
   Heading,
   ListEl,
   ImageEl,
-} from './styledComponent'
-
-import {
   LoaderContainer,
   FailureHeading,
   FailureDescription,
-} from '../VideoItemDetails/styledComponent'
+} from './styledComponent'
 
 const SavedVideos = props => {
   const {match} = props

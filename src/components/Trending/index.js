@@ -15,15 +15,12 @@ import {
   FireIcon,
   Heading,
   ListEl,
-} from './styledComponent'
-
-import {
   LoaderContainer,
   ImageEl,
   FailureHeading,
   FailureDescription,
   RetryButton,
-} from '../VideoItemDetails/styledComponent'
+} from './styledComponent'
 
 const statusConstant = {
   success: 'SUCCESS',
@@ -70,6 +67,8 @@ class Trending extends Component {
       const data = await response.json()
       const trendingList = await this.getFilterObject(data.videos)
       this.setState({trendingList, responseStatus: statusConstant.success})
+    } else {
+      this.setState({responseStatus: statusConstant.failure})
     }
   }
 

@@ -78,3 +78,29 @@ export const ImageEl = styled.img`
     width: 80%;
   }
 `
+
+// Loader Container div
+export const LoaderContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+// h1
+export const FailureHeading = styled.h1`
+  color: ${props => (props.lightTheme ? '#1e293b' : '#ffffff')};
+  font-size: 22px;
+  font-weight: 550;
+  margin-bottom: 0px;
+  text-align: center;
+`
+
+// paragraph element
+export const FailureDescription = styled.p`
+  color: #606060;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+`
