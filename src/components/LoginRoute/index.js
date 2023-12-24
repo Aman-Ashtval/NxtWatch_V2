@@ -73,13 +73,7 @@ class LoginRoute extends Component {
       {value => {
         const {lightTheme} = value
 
-        const {
-          username,
-          password,
-          showPassword,
-          showErrorMsg,
-          errorMsg,
-        } = this.state
+        const {username, password, showPassword} = this.state
         const passwordType = showPassword ? 'text' : 'password'
         return (
           <FormElement onSubmit={this.submitFormDetails}>
@@ -94,7 +88,7 @@ class LoginRoute extends Component {
               onChange={this.onChangeUsername}
             />
             <LabelEl htmlFor="password" lightTheme={lightTheme}>
-              USERNAME
+              PASSWORD
             </LabelEl>
             <InputEl
               type={passwordType}
@@ -116,9 +110,6 @@ class LoginRoute extends Component {
             </Container>
 
             <LoginButton type="submit">Login</LoginButton>
-            {showErrorMsg && (
-              <ErrorMsg lightTheme={lightTheme}>*{errorMsg}</ErrorMsg>
-            )}
           </FormElement>
         )
       }}
@@ -140,12 +131,19 @@ class LoginRoute extends Component {
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
 
+          const {showErrorMsg, errorMsg} = this.state
+
           return (
             <>
               <LoginContainer lightTheme={lightTheme}>
                 <FormContainer lightTheme={lightTheme}>
                   <LogoImage src={appLogoUrl} alt="website logo" />
                   {this.getFormView()}
+                  {showErrorMsg && (
+                    <ErrorMsg
+                      lightTheme={lightTheme}
+                    >{`*${errorMsg}`}</ErrorMsg>
+                  )}
                 </FormContainer>
               </LoginContainer>
             </>

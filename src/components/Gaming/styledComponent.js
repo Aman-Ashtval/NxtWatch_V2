@@ -3,11 +3,18 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {FaGamepad} from 'react-icons/fa'
 
+// Background container
+export const BgContainer = styled.div`
+  padding: 0px;
+  margin: 0px;
+  background-color: ${props => (props.lightTheme ? '#f9f9f9' : '  #0f0f0f ')};
+`
+
 export const GamingContainer = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: ${props => (props.lightTheme ? ' #f8fafc' : ' #181818')};
+  background-color: transparent;
 `
 // Right Container div
 export const RightContainer = styled.div`
@@ -92,9 +99,9 @@ export const GameBanner = styled.img`
 `
 
 // game title h1
-export const Title = styled.h1`
+export const Title = styled.p`
   font-size: 22px;
-  font-weight: 450;
+  font-weight: 500;
   color: ${props => (props.lightTheme ? '#1e293b' : '#ffffff')};
   margin: 10px 0px;
   @media (max-width: 768px) {

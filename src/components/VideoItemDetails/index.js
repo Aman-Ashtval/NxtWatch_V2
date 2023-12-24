@@ -12,6 +12,7 @@ import AppContext from '../../context/AppContext'
 
 import {
   BgContainer,
+  VideoDetailsContainer,
   RightContainer,
   Player,
   Heading,
@@ -61,7 +62,7 @@ class VideoItemDetails extends Component {
       thumbnailUrl: obj.thumbnail_url,
       title: obj.title,
       videoUrl: obj.video_url,
-      viewCount: obj.view_count,
+      totalView: obj.view_count,
       description: obj.description,
       channel: {
         name: obj.channel.name,
@@ -114,12 +115,14 @@ class VideoItemDetails extends Component {
         const {
           videoUrl,
           title,
-          viewCount,
+          totalView,
           publishedAt,
           channel,
           description,
         } = videoDetails
         const {name, profileImageUrl, subscriberCount} = channel
+
+        const saveButtonText = isSaved ? 'Saved' : 'Save'
 
         // save video method calling
         const toggleSave = () => {
@@ -133,7 +136,7 @@ class VideoItemDetails extends Component {
             <Heading lightTheme={lightTheme}>{title}</Heading>
             <FlexContainer>
               <Container>
-                <ParagraphEl>{viewCount} views</ParagraphEl>
+                <ParagraphEl>{totalView} views</ParagraphEl>
                 <DotIcon />
                 <ParagraphEl>
                   {formatDistanceToNow(new Date(publishedAt))}
@@ -159,7 +162,7 @@ class VideoItemDetails extends Component {
                     fontSize="18px"
                     style={{margin: '0px 5px'}}
                   />
-                  Save
+                  {saveButtonText}
                 </ResponseButton>
               </Container>
             </FlexContainer>
@@ -167,7 +170,9 @@ class VideoItemDetails extends Component {
             <ChannelContainer>
               <ProfileImage src={profileImageUrl} alt={name} />
               <TextContainer>
-                <Name lightTheme={lightTheme}>{name}</Name>
+                <Name as="p" lightTheme={lightTheme}>
+                  {name}
+                </Name>
                 <Title lightTheme={lightTheme}>
                   {subscriberCount} Subscribers
                 </Title>
@@ -191,12 +196,12 @@ class VideoItemDetails extends Component {
             {lightTheme ? (
               <ImageEl
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-                alt="no videos"
+                alt="failure view"
               />
             ) : (
               <ImageEl
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-                alt="no videos"
+                alt="failure view"
               />
             )}
             <FailureHeading lightTheme={lightTheme}>
@@ -206,9 +211,7 @@ class VideoItemDetails extends Component {
               We are having some trouble to complete your request. Please try
               again.
             </FailureDescription>
-            <RetryButton type="button" onClick={this.getVideoDetails}>
-              Retry
-            </RetryButton>
+            <RetryButton onClick={this.getVideoDetails}>Retry</RetryButton>
           </LoaderContainer>
         )
       }}
@@ -245,15 +248,13 @@ class VideoItemDetails extends Component {
           const {lightTheme} = value
 
           return (
-            <>
+            <BgContainer lightTheme={lightTheme} data-testid="videoItemDetails">
               <Header />
-              <BgContainer>
+              <VideoDetailsContainer>
                 <LeftBar />
-                <RightContainer lightTheme={lightTheme}>
-                  {this.getVideoDetailsView()}
-                </RightContainer>
-              </BgContainer>
-            </>
+                <RightContainer>{this.getVideoDetailsView()}</RightContainer>
+              </VideoDetailsContainer>
+            </BgContainer>
           )
         }}
       </AppContext.Consumer>

@@ -4,6 +4,7 @@ import LeftBar from '../LeftBar'
 import TrendingItem from '../TrendingItem'
 
 import {
+  BgContainer,
   TrendingContainer,
   RightContainer,
   TrendingBg,
@@ -28,9 +29,9 @@ const SavedVideos = props => {
         const {lightTheme, savedVideosList} = value
 
         return (
-          <>
+          <BgContainer data-testid="savedVideos" lightTheme={lightTheme}>
             <Header activePath={path} />
-            <TrendingContainer lightTheme={lightTheme}>
+            <TrendingContainer>
               <LeftBar activePath={path} />
               <RightContainer>
                 {savedVideosList.length === 0 ? (
@@ -48,7 +49,7 @@ const SavedVideos = props => {
                   </LoaderContainer>
                 ) : (
                   <>
-                    <TrendingBg lightTheme={lightTheme}>
+                    <TrendingBg lightTheme={lightTheme} data-testid="banner">
                       <FireIcon theme={lightTheme ? 'true' : 'false'} />
                       <Heading lightTheme={lightTheme}>Saved Videos</Heading>
                     </TrendingBg>
@@ -61,7 +62,7 @@ const SavedVideos = props => {
                 )}
               </RightContainer>
             </TrendingContainer>
-          </>
+          </BgContainer>
         )
       }}
     </AppContext.Consumer>

@@ -24,17 +24,17 @@ const NotFound = () => (
               {lightTheme ? (
                 <ImageEl
                   src="https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png"
-                  alt=""
+                  alt="not found"
                 />
               ) : (
                 <ImageEl
                   src="https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-dark-theme-img.png"
-                  alt=""
+                  alt="not found"
                 />
               )}
               <Heading lightTheme={lightTheme}>Page Not Found</Heading>
               <Description>
-                We are sorry, the page you requested could not be found
+                we are sorry, the page you requested could not be found.
               </Description>
             </RightContainer>
           </NoteFoundContainer>

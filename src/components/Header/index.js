@@ -31,7 +31,6 @@ import {
   NavLink,
   ListItem,
   HomeIcon,
-  NameParagraph,
   FireIcon,
   GameIcon,
   SaveListIcon,
@@ -91,11 +90,11 @@ const Header = props => {
         return (
           <HeaderContainer lightTheme={lightTheme}>
             <Link to="/">
-              <HeaderLogo src={headerLogoImageUrl} alt="nxt watch logo" />
+              <HeaderLogo src={headerLogoImageUrl} alt="website logo" />
             </Link>
 
             <IconContainer>
-              <ThemeChangeButton type="button" onClick={changeAppTheme}>
+              <ThemeChangeButton onClick={changeAppTheme} data-testid="theme">
                 {themeIcon}
               </ThemeChangeButton>
 
@@ -103,7 +102,7 @@ const Header = props => {
               <PopupEl
                 modal
                 trigger={
-                  <MenuButton type="button" lightTheme={lightTheme}>
+                  <MenuButton lightTheme={lightTheme}>
                     <ImageEl
                       src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
                       alt="profile"
@@ -118,7 +117,7 @@ const Header = props => {
               >
                 {close => (
                   <MenuContainer lightTheme={lightTheme}>
-                    <CancelButton type="button" onClick={() => close()}>
+                    <CancelButton onClick={() => close()}>
                       <CancelIcon lightTheme={lightTheme} />
                     </CancelButton>
 
@@ -133,16 +132,12 @@ const Header = props => {
                           lightTheme,
                         }
                         return (
-                          <NavLink to={url} key={id}>
-                            <ListItem {...itemProp}>
-                              <Icon
-                                active={activePath === url ? 'true' : 'false'}
-                              />
-                              <NameParagraph {...itemProp}>
-                                {displayText}
-                              </NameParagraph>
-                            </ListItem>
-                          </NavLink>
+                          <ListItem {...itemProp} key={id}>
+                            <Icon
+                              active={activePath === url ? 'true' : 'false'}
+                            />
+                            <NavLink to={url}>{displayText}</NavLink>
+                          </ListItem>
                         )
                       })}
                     </MenuItemList>
@@ -154,7 +149,7 @@ const Header = props => {
               <Popup
                 modal
                 trigger={
-                  <LogoutBtn type="button" lightTheme={lightTheme}>
+                  <LogoutBtn lightTheme={lightTheme}>
                     <SpanText>Logout</SpanText>
                     <FaArrowAltCircleRight
                       fontSize="28px"
@@ -169,17 +164,13 @@ const Header = props => {
                   <>
                     <PopupContainer lightTheme={lightTheme}>
                       <PopupMsg lightTheme={lightTheme}>
-                        Are you sure you want to logout?
+                        Are you sure, you want to logout
                       </PopupMsg>
                       <center>
-                        <CustomButton type="button" onClick={() => close()}>
+                        <CustomButton onClick={() => close()}>
                           Cancel
                         </CustomButton>
-                        <CustomButton
-                          fill="true"
-                          type="button"
-                          onClick={logoutUser}
-                        >
+                        <CustomButton fill="true" onClick={logoutUser}>
                           Confirm
                         </CustomButton>
                       </center>

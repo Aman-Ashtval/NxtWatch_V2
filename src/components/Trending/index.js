@@ -8,6 +8,7 @@ import LeftBar from '../LeftBar'
 import TrendingItem from '../TrendingItem'
 
 import {
+  BgContainer,
   TrendingContainer,
   RightContainer,
   TrendingBg,
@@ -24,7 +25,6 @@ import {
   RetryButton,
 } from '../VideoItemDetails/styledComponent'
 
-// status object
 const statusConstant = {
   success: 'SUCCESS',
   failure: 'FAILURE',
@@ -82,7 +82,7 @@ class Trending extends Component {
         const {trendingList} = this.state
         return (
           <>
-            <TrendingBg lightTheme={lightTheme}>
+            <TrendingBg lightTheme={lightTheme} data-testid="banner">
               <FireIcon theme={lightTheme ? 'true' : 'false'} />
               <Heading lightTheme={lightTheme}>Trending</Heading>
             </TrendingBg>
@@ -108,12 +108,12 @@ class Trending extends Component {
             {lightTheme ? (
               <ImageEl
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-                alt="no videos"
+                alt="failure view"
               />
             ) : (
               <ImageEl
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-                alt="no videos"
+                alt="failure view"
               />
             )}
             <FailureHeading lightTheme={lightTheme}>
@@ -123,9 +123,7 @@ class Trending extends Component {
               We are having some trouble to complete your request. Please try
               again.
             </FailureDescription>
-            <RetryButton type="button" onClick={this.getTrendingData}>
-              Retry
-            </RetryButton>
+            <RetryButton onClick={this.getTrendingData}>Retry</RetryButton>
           </LoaderContainer>
         )
       }}
@@ -163,13 +161,13 @@ class Trending extends Component {
           const {lightTheme} = value
 
           return (
-            <>
+            <BgContainer lightTheme={lightTheme} data-testid="trending">
               <Header activePath={path} />
-              <TrendingContainer lightTheme={lightTheme}>
+              <TrendingContainer>
                 <LeftBar activePath={path} />
                 <RightContainer>{this.renderTrendingView()}</RightContainer>
               </TrendingContainer>
-            </>
+            </BgContainer>
           )
         }}
       </AppContext.Consumer>

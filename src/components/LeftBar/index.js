@@ -6,7 +6,6 @@ import {
   NavLink,
   ListItem,
   HomeIcon,
-  NameParagraph,
   FireIcon,
   GameIcon,
   SaveListIcon,
@@ -64,12 +63,10 @@ const LeftBar = props => {
                   lightTheme,
                 }
                 return (
-                  <NavLink to={url} key={id}>
-                    <ListItem {...itemProp}>
-                      <Icon active={activePath === url ? 'true' : 'false'} />
-                      <NameParagraph {...itemProp}>{displayText}</NameParagraph>
-                    </ListItem>
-                  </NavLink>
+                  <ListItem {...itemProp} key={id}>
+                    <Icon active={activePath === url ? 'true' : 'false'} />
+                    <NavLink to={url}>{displayText}</NavLink>
+                  </ListItem>
                 )
               })}
             </MenuItemList>
@@ -92,7 +89,7 @@ const LeftBar = props => {
                 />
               </SocialIconsContainer>
               <Description lightTheme={lightTheme}>
-                Enjoy! Now to see your channels and recommendation
+                Enjoy! Now to see your channels and recommendations!
               </Description>
             </BottomContainer>
           </LeftContainer>

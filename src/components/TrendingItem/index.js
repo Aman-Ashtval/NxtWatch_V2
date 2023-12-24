@@ -30,14 +30,20 @@ const TrendingItem = props => {
           <LinkItem to={`/videos/${id}`}>
             <ListItem>
               <ContainerBg>
-                <ImageEl src={thumbnailUrl} alt={title} width="100%" />
+                <ImageEl
+                  src={thumbnailUrl}
+                  alt="video thumbnail"
+                  width="100%"
+                />
               </ContainerBg>
 
               <TextContainer>
                 {/* small device profile image-------------------------------------------------> */}
                 <ImageEl src={profileImageUrl} alt={name} width="40px" d="sm" />
                 <Container>
-                  <Heading lightTheme={lightTheme}>{title}</Heading>
+                  <Heading as="p" lightTheme={lightTheme}>
+                    {title}
+                  </Heading>
                   <Name d="lg">{name}</Name>
                   <ViewsBg>
                     <ParagraphEl d="sm">{name}</ParagraphEl>

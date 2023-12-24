@@ -7,6 +7,7 @@ import Header from '../Header'
 import LeftBar from '../LeftBar'
 
 import {
+  BgContainer,
   GamingContainer,
   RightContainer,
   GamingBg,
@@ -82,7 +83,7 @@ class Gaming extends Component {
         const {gamesList} = this.state
         return (
           <>
-            <GamingBg lightTheme={lightTheme}>
+            <GamingBg lightTheme={lightTheme} data-testid="banner">
               <GameIcon theme={lightTheme ? 'true' : 'false'} />
               <GameHeading lightTheme={lightTheme}>Gaming</GameHeading>
             </GamingBg>
@@ -92,9 +93,11 @@ class Gaming extends Component {
                 return (
                   <LinkItem to={`/videos/${id}`} key={id}>
                     <ListItem>
-                      <GameBanner src={thumbnailUrl} alt={title} />
+                      <GameBanner src={thumbnailUrl} alt="video thumbnail" />
                       <Title lightTheme={lightTheme}>{title}</Title>
-                      <Description>{totalView} Watching Worldwide</Description>
+                      <Description>
+                        {`${totalView} Watching Worldwide`}{' '}
+                      </Description>
                     </ListItem>
                   </LinkItem>
                 )
@@ -117,12 +120,12 @@ class Gaming extends Component {
             {lightTheme ? (
               <ImageEl
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-                alt="no videos"
+                alt="failure view"
               />
             ) : (
               <ImageEl
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-                alt="no videos"
+                alt="failure view"
               />
             )}
             <FailureHeading lightTheme={lightTheme}>
@@ -132,9 +135,7 @@ class Gaming extends Component {
               We are having some trouble to complete your request. Please try
               again.
             </FailureDescription>
-            <RetryButton type="button" onClick={this.getGamingData}>
-              Retry
-            </RetryButton>
+            <RetryButton onClick={this.getGamingData}>Retry</RetryButton>
           </LoaderContainer>
         )
       }}
@@ -173,13 +174,13 @@ class Gaming extends Component {
           const {lightTheme} = value
 
           return (
-            <>
+            <BgContainer lightTheme={lightTheme} data-testid="gaming">
               <Header activePath={path} />
-              <GamingContainer lightTheme={lightTheme}>
+              <GamingContainer>
                 <LeftBar activePath={path} />
                 <RightContainer>{this.renderGamingView()}</RightContainer>
               </GamingContainer>
-            </>
+            </BgContainer>
           )
         }}
       </AppContext.Consumer>

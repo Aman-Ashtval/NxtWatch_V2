@@ -34,11 +34,21 @@ const VideoItem = props => {
         return (
           <VideoLink to={`/videos/${id}`}>
             <ListItem>
-              <CardBannerImg src={thumbnailUrl} alt={title} width="100%" />
+              <CardBannerImg
+                src={thumbnailUrl}
+                alt="video thumbnail"
+                width="100%"
+              />
               <Container>
-                <CardBannerImg src={profileImageUrl} alt={name} width="30px" />
+                <CardBannerImg
+                  src={profileImageUrl}
+                  alt="channel logo"
+                  width="30px"
+                />
                 <TextContainer>
-                  <CardHeading lightTheme={lightTheme}>{title}</CardHeading>
+                  <CardHeading as="p" lightTheme={lightTheme}>
+                    {title}
+                  </CardHeading>
                   <ParagraphEl>{name}</ParagraphEl>
                   <Container>
                     <ParagraphEl>{totalView} views</ParagraphEl>

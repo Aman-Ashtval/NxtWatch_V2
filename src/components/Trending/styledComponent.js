@@ -2,11 +2,18 @@ import styled from 'styled-components'
 
 import {FaFire} from 'react-icons/fa'
 
+// Background container
+export const BgContainer = styled.div`
+  padding: 0px;
+  margin: 0px;
+  background-color: ${props => (props.lightTheme ? '#f9f9f9' : '  #0f0f0f ')};
+`
+
 export const TrendingContainer = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: ${props => (props.lightTheme ? ' #f8fafc' : ' #181818')};
+  background-color: transparent;
 `
 // Right Container div
 export const RightContainer = styled.div`

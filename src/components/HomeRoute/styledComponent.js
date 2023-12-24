@@ -2,11 +2,18 @@ import styled from 'styled-components'
 
 import {BsX} from 'react-icons/bs'
 
+// Background container
+export const HomeBg = styled.div`
+  padding: 0px;
+  margin: 0px;
+  background-color: ${props => (props.lightTheme ? ' #f9f9f9' : ' #181818')};
+`
+
 export const HomeContainer = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: ${props => (props.lightTheme ? ' #f8fafc' : ' #181818')};
+  background-color: transparent;
 `
 // Right Container div
 export const RightContainer = styled.div`
@@ -22,21 +29,34 @@ export const BannerContainer = styled.div`
   background-size: cover;
   height: 35vh;
   padding: 25px 16px;
-  display: ${props => (props.showBanner ? 'flex' : 'none')};
+  display: flex;
   flex-direction: column;
+`
+
+// cross button
+export const CrossButton = styled.button`
+  border: none;
+  background-color: transparent;
+  align-self: flex-end;
+  cursor: pointer;
+  padding: 3px;
 `
 
 // Cross Icon for banner
 export const CrossIcon = styled(BsX)`
-  font-size: 50px;
+  font-size: 35px;
   color: #1e293b;
-  align-self: flex-end;
-  cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 30px;
+  }
 `
 
 // Banner Logo image
 export const BannerLogo = styled.img`
   width: 180px;
+  @media (max-width: 768px) {
+    width: 150px;
+  }
 `
 
 // Banner Description paragraph
@@ -44,6 +64,9 @@ export const BannerDescription = styled.p`
   color: #1e293b;
   font-size: 20px;
   font-weight: 430;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `
 
 // Get it button element
@@ -56,6 +79,9 @@ export const GetItButton = styled.button`
   font-size: 18px;
   font-weight: 500;
   margin-top: 22px;
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
 `
 
 // search input container

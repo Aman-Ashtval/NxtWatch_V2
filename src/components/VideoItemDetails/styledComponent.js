@@ -2,19 +2,26 @@ import styled from 'styled-components'
 import ReactPlayer from 'react-player'
 import {BsDot} from 'react-icons/bs'
 
-// videos details route Bg container
+// Background container
 export const BgContainer = styled.div`
+  padding: 0px;
+  margin: 0px;
+  background-color: ${props => (props.lightTheme ? '#f9f9f9' : '  #0f0f0f ')};
+`
+
+// videos details route Bg container
+export const VideoDetailsContainer = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: transparent;
 `
 
 // Right Container div
 export const RightContainer = styled.div`
   height: 100vh;
   flex-grow: 1;
-  background-color: ${props => (props.lightTheme ? ' #f8fafc' : ' #181818')};
+  background-color: transparent;
   padding: 16px;
   overflow-y: scroll;
 `
@@ -77,7 +84,7 @@ export const DotIcon = styled(BsDot)`
 
 // response button element
 export const ResponseButton = styled.button`
-  color: ${props => (props.isFill ? ' #4f46e5' : '#475569')};
+  color: ${props => (props.isFill ? ' #2563eb' : '#64748b')};
   font-size: 16px;
   font-weight: 500;
   margin: 0px 16px 0px 0px;

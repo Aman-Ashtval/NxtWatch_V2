@@ -5,12 +5,14 @@ import Cookies from 'js-cookie'
 import {BiSearch} from 'react-icons/bi'
 
 import {
+  HomeBg,
   HomeContainer,
   RightContainer,
   BannerContainer,
   BannerLogo,
   BannerDescription,
   GetItButton,
+  CrossButton,
   CrossIcon,
   InputContainer,
   InputEl,
@@ -75,7 +77,6 @@ class HomeRoute extends Component {
       },
     }
     const response = await fetch(api, options)
-
     if (response.ok) {
       const data = await response.json()
       const videosList = await this.getFilterObject(data.videos)
@@ -113,9 +114,7 @@ class HomeRoute extends Component {
             <ParagraphEl>
               Try different key words or remove search filter
             </ParagraphEl>
-            <RetryButton type="button" onClick={this.retrySearchItem}>
-              Retry
-            </RetryButton>
+            <RetryButton onClick={this.retrySearchItem}>Retry</RetryButton>
           </LoaderContainer>
         )
       }}
@@ -155,21 +154,22 @@ class HomeRoute extends Component {
             {lightTheme ? (
               <ImageEl
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-                alt="no videos"
+                alt="failure view"
               />
             ) : (
               <ImageEl
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-                alt="no videos"
+                alt="failure view"
               />
             )}
-            <Heading lightTheme={lightTheme}>No Search results found</Heading>
+            <Heading lightTheme={lightTheme}>
+              Oops! Something Went Wrong
+            </Heading>
             <ParagraphEl>
-              Try different key words or remove search filter
+              We are having some trouble to complete your request. Please try
+              again.
             </ParagraphEl>
-            <RetryButton type="button" onClick={this.retrySearchItem}>
-              Retry
-            </RetryButton>
+            <RetryButton onClick={this.retrySearchItem}>Retry</RetryButton>
           </LoaderContainer>
         )
       }}
@@ -200,19 +200,24 @@ class HomeRoute extends Component {
 
   getBannerView = () => {
     const {showBanner} = this.state
-    return (
-      <BannerContainer showBanner={showBanner}>
-        <CrossIcon onClick={this.hideBanner} />
-        <BannerLogo
-          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-          alt=""
-        />
-        <BannerDescription>
-          Buy Nxt Watch Premium prepaid plans with UPI
-        </BannerDescription>
-        <GetItButton type="button">GET IT NOW</GetItButton>
-      </BannerContainer>
-    )
+    if (showBanner) {
+      return (
+        <BannerContainer data-testid="banner">
+          <CrossButton data-testid="close">
+            <CrossIcon onClick={this.hideBanner} />
+          </CrossButton>
+          <BannerLogo
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+            alt="nxt watch logo"
+          />
+          <BannerDescription>
+            Buy Nxt Watch Premium prepaid plans with UPI
+          </BannerDescription>
+          <GetItButton type="button">GET IT NOW</GetItButton>
+        </BannerContainer>
+      )
+    }
+    return null
   }
 
   render() {
@@ -225,9 +230,9 @@ class HomeRoute extends Component {
           const {lightTheme} = value
 
           return (
-            <>
+            <HomeBg data-testid="home" lightTheme={lightTheme}>
               <Header activePath={path} />
-              <HomeContainer data-testid="home" lightTheme={lightTheme}>
+              <HomeContainer>
                 <LeftBar activePath={path} />
                 <RightContainer>
                   {this.getBannerView()}
@@ -236,13 +241,16 @@ class HomeRoute extends Component {
 
                   <InputContainer>
                     <InputEl
-                      type="text"
+                      type="search"
                       value={searchInput}
                       onChange={this.onChangeSearchInput}
                       placeholder="Search"
                       lightTheme={lightTheme}
                     />
-                    <SearchButton type="search" onClick={this.getVideoData}>
+                    <SearchButton
+                      onClick={this.getVideoData}
+                      data-testid="searchButton"
+                    >
                       <BiSearch />
                     </SearchButton>
                   </InputContainer>
@@ -251,7 +259,7 @@ class HomeRoute extends Component {
                   {this.renderResponseView()}
                 </RightContainer>
               </HomeContainer>
-            </>
+            </HomeBg>
           )
         }}
       </AppContext.Consumer>
