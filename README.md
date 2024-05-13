@@ -6,27 +6,59 @@ This is an online video playing app where an user can search the videos and can 
 
 - Login views
 
-![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608729/login_desktop_mi1iyk.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608730/login_sm_pshu9k.png)
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608729/login_desktop_mi1iyk.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608730/login_sm_pshu9k.png)
 
 - Home views
 
-![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608735/home_desktop_light_hgyi8y.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608735/home_desktop_dark_ykxigx.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608731/home_extra-sm_light_pwxpsa.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608731/home_extra-sm_dark_ejdgbe.png)
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608735/home_desktop_light_hgyi8y.png)
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608735/home_desktop_dark_ykxigx.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608731/home_extra-sm_light_pwxpsa.png)
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608731/home_extra-sm_dark_ejdgbe.png)
 
 - Trending views
 
-![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608738/trending_lg_light_iozqte.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608735/trending_lg_dark_abum99.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608737/trending_sm_light_hh7ech.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608736/trending_sm_dark_hlbs2v.png)
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608738/trending_lg_light_iozqte.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608735/trending_lg_dark_abum99.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608737/trending_sm_light_hh7ech.png)
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608736/trending_sm_dark_hlbs2v.png)
 
 - Gaming views
 
-![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608730/gaming_desktop_light_ebqylq.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608729/gaming_desktop_dark_xvjk1p.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608729/gaming_sm_light_qkdvnf.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608728/gaming_sm_dark_ocfcc9.png)
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608730/gaming_desktop_light_ebqylq.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608729/gaming_desktop_dark_xvjk1p.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608729/gaming_sm_light_qkdvnf.png)
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608728/gaming_sm_dark_ocfcc9.png)
 
 - SavedVideos views
 
-![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608736/saved_videos_desktop_light_p8d0rq.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608736/saved_videos_desktop_dark_udz8us.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608736/saved_videos_sm_light_wgwdta.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608734/saved_videos_sm_dark_wd77ma.png)
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608736/saved_videos_desktop_light_p8d0rq.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608736/saved_videos_desktop_dark_udz8us.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608736/saved_videos_sm_light_wgwdta.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608734/saved_videos_sm_dark_wd77ma.png)
 
 - VideoDetails views
 
-![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608739/video_detail_desktop_light_stzxof.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608739/video_detail_desktop_dark_ej3maq.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608739/video_detail_sm_light_o4c1f8.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608739/video_detail_sm_dark_wzgcnr.png)
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608739/video_detail_desktop_light_stzxof.png)
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608739/video_detail_desktop_dark_ej3maq.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608739/video_detail_sm_light_o4c1f8.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608739/video_detail_sm_dark_wzgcnr.png)
 
 - Small device menu view
 
@@ -34,7 +66,9 @@ This is an online video playing app where an user can search the videos and can 
 
 - Logout views
 
-![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608733/logout_desktop_izzinj.png) ![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608732/logout_sm_doxskz.png)
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608733/logout_desktop_izzinj.png) 
+
+![Screenshot](https://res.cloudinary.com/dh4dcboea/image/upload/v1715608732/logout_sm_doxskz.png)
 
 ## Components Structure
 
