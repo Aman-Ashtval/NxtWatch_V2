@@ -1,7 +1,7 @@
 import {withRouter, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import {FaMoon} from 'react-icons/fa'
+import {RiMoonFill} from 'react-icons/ri'
 import {IoSunnyOutline} from 'react-icons/io5'
 
 import 'reactjs-popup/dist/index.css'
@@ -81,7 +81,7 @@ const Header = props => {
           ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
           : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
         const themeIcon = lightTheme ? (
-          <FaMoon fontSize="24px" />
+          <RiMoonFill fontSize="30px" />
         ) : (
           <IoSunnyOutline color="#ffffff" fontSize="28px" />
         )

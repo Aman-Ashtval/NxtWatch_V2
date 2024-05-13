@@ -9,25 +9,31 @@ export const LinkItem = styled(Link)`
 
 // list item li
 export const ListItem = styled.li`
-  margin-bottom: 50px;
+  margin-bottom: 48px;
+  height: 300px;
   display: flex;
   align-items: flex-start;
   @media (max-width: 768px) {
     flex-direction: column;
+    height: 400px;
+    margin-bottom: 32px;
   }
 `
 
 // image image container
 export const ContainerBg = styled.div`
   width: 50%;
+  height: inherit;
   @media (max-width: 768px) {
     width: 100%;
+    height: 300px;
   }
 `
 
 // trending card image
 export const ImageEl = styled.img`
   width: ${props => props.width};
+  height: inherit;
   @media (min-width: 768px) {
     display: ${props => (props.d === 'sm' ? 'none' : null)};
   }
@@ -41,6 +47,8 @@ export const TextContainer = styled.div`
   align-items: flex-start;
   @media (max-width: 768px) {
     width: 100%;
+    flex-grow: 1;
+    margin-top: 3px;
   }
 `
 

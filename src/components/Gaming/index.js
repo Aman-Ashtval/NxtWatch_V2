@@ -92,7 +92,7 @@ class Gaming extends Component {
                 const {id, title, thumbnailUrl, totalView} = each
                 return (
                   <LinkItem to={`/videos/${id}`} key={id}>
-                    <ListItem>
+                    <ListItem lightTheme={lightTheme}>
                       <GameBanner src={thumbnailUrl} alt="video thumbnail" />
                       <Title lightTheme={lightTheme}>{title}</Title>
                       <Description>

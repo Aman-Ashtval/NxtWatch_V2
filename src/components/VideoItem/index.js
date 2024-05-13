@@ -33,7 +33,7 @@ const VideoItem = props => {
 
         return (
           <VideoLink to={`/videos/${id}`}>
-            <ListItem>
+            <ListItem lightTheme={lightTheme}>
               <CardBannerImg
                 src={thumbnailUrl}
                 alt="video thumbnail"

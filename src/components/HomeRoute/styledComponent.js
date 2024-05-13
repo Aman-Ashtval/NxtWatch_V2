@@ -27,7 +27,7 @@ export const BannerContainer = styled.div`
   margin: 0px;
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
   background-size: cover;
-  height: 35vh;
+  height: 280px;
   padding: 25px 16px;
   display: flex;
   flex-direction: column;
@@ -74,11 +74,12 @@ export const GetItButton = styled.button`
   align-self: flex-start;
   border: 2px solid #1e293b;
   background-color: transparent;
-  padding: 10px 15px;
+  padding: 8px 15px;
   color: #1e293b;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   margin-top: 22px;
+  cursor: pointer;
   @media (max-width: 768px) {
     margin-top: 20px;
   }
@@ -135,7 +136,7 @@ export const ListContainer = styled.ul`
   padding: 0px;
   overflow-y: scroll;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 `
 

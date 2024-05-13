@@ -127,14 +127,17 @@ class HomeRoute extends Component {
       {value => {
         const {lightTheme} = value
 
-        const {videosList} = this.state
+        const {videosList, searchInput} = this.state
+        const filteredVideosList = videosList.filter(each =>
+          each.title.toLowerCase().includes(searchInput.toLowerCase()),
+        )
 
-        if (videosList.length === 0) {
+        if (filteredVideosList.length === 0) {
           return this.getNoSearchView(lightTheme)
         }
         return (
           <ListContainer>
-            {videosList.map(each => (
+            {filteredVideosList.map(each => (
               <VideoItem key={each.id} videoDetails={each} />
             ))}
           </ListContainer>
@@ -203,7 +206,7 @@ class HomeRoute extends Component {
     if (showBanner) {
       return (
         <BannerContainer data-testid="banner">
-          <CrossButton data-testid="close">
+          <CrossButton type="button" data-testid="close">
             <CrossIcon onClick={this.hideBanner} />
           </CrossButton>
           <BannerLogo
